@@ -1,0 +1,115 @@
+body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background-color: #000000; /* Pure Black */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    user-select: none;
+}
+
+/* Dedication Text */
+#dedication {
+    position: absolute; left: 30px; bottom: 30px;
+    z-index: 100; color: #ff00de;
+    text-shadow: 0 0 5px rgba(255, 0, 222, 0.5);
+    pointer-events: none;
+    line-height: 1.4;
+}
+#dedication p:first-child { font-weight: bold; font-size: 1.2rem; }
+
+/* UI Controls */
+#ui-container {
+    position: absolute; top: 20px; left: 50%;
+    transform: translateX(-50%); z-index: 100; text-align: center;
+}
+
+h1 {
+    color: white; margin: 0 0 15px 0;
+    font-weight: 300; letter-spacing: 2px;
+}
+
+.controls {
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,0,222,0.3);
+    padding: 10px 20px; border-radius: 50px;
+    display: flex; align-items: center; gap: 15px;
+}
+
+button {
+    padding: 8px 16px; border: none; border-radius: 20px;
+    background: #ff00de; color: white; cursor: pointer;
+    font-weight: bold; transition: 0.3s;
+}
+button:hover { background: #d900bd; transform: scale(1.05); }
+#clear-btn { background: transparent; border: 1px solid #ff00de; color: #ff00de; }
+label { color: white; font-size: 0.9rem; }
+
+/* FLOWER STYLING */
+.flower {
+    position: absolute;
+    /* Size is now set in JS */
+    background-size: contain; background-repeat: no-repeat;
+    transform-origin: bottom center;
+    pointer-events: none;
+    will-change: transform, opacity;
+    
+    /* Makes black background JPEGs transparent */
+    mix-blend-mode: screen;
+    
+    animation: 
+        bloomIn 0.8s ease-out forwards,
+        sway var(--sway-duration) ease-in-out infinite alternate;
+}
+
+/* Smooth Fade Out Class */
+.flower.fade-out {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+@keyframes bloomIn {
+    0% { transform: scale(0) translateY(50px); opacity: 0; }
+    100% { transform: scale(1) translateY(0) rotate(var(--lean)); opacity: 1; }
+}
+
+@keyframes sway {
+    0% { transform: rotate(calc(var(--lean) - 5deg)); }
+    100% { transform: rotate(calc(var(--lean) + 5deg)); }
+}
+
+/* Magic Sparkle Cursor */
+.sparkle {
+    position: absolute;
+    width: 3px; height: 3px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 4px white;
+    animation: fadeOutSparkle 0.8s linear forwards;
+}
+
+@keyframes fadeOutSparkle {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0) translateY(10px); opacity: 0; }
+}
+
+/* Ambient Fireflies */
+.firefly {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: #ccff00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ccff00;
+    opacity: 0;
+    animation: fireflyFly 10s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes fireflyFly {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translate(100px, -100px); opacity: 0; }
+}
